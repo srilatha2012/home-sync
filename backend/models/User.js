@@ -2,11 +2,11 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const saltRounds = process.env.SALT_ROUNDS;
+const saltRounds = Number(process.env.SALT_ROUNDS) || 10;
 
 //Create user schema
 const userSchema = new mongoose.Schema({
-    name: {
+    username: {
         type: String,
         required: true,
         trim: true
@@ -41,13 +41,13 @@ const userSchema = new mongoose.Schema({
     { timestamps: true }
 
 );
-//Create User module with userSchema
-const User = mongoose.model("User", userSchema);
+
 
 //Hash password before saving a new user or when password is changed
-userSchema.pre("save", async function() {
-    if(this.isNew || this.isModified("password")) {
-        this.password= await bcrypt.hash(this.password, saltRounds);
+userSchema.pre("save", async function () {
+    if (this.isNew || this.isModified("password")) {
+
+        this.password = await bcrypt.hash(this.password, saltRounds);
     }
 });
 
@@ -56,5 +56,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password); //Here don't need await, because it already returns a Promise
 };
 
+//Create User model with userSchema
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;

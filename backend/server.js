@@ -6,6 +6,7 @@ require("dotenv").config();
 //Import Dependencies
 const express = require("express");
 const dbConnection = require("./config/connection");
+const userRoutes = require("./routes/api/userRoutes");
 
 //create express application
 const app = express();
@@ -14,6 +15,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 //Middleware
+app.use(express.json());
+
+app.use("/api/users", userRoutes);
 
 
 //Routes
@@ -21,6 +25,8 @@ const PORT = process.env.PORT || 3000;
 app.get("/api/health", (req, res) => {
     res.json({message: "HomeSync API is running "});
 });
+
+
 
 //Connect to MongoDB and start server
 dbConnection()

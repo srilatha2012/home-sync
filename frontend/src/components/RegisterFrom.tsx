@@ -23,6 +23,18 @@ function RegisterForm() {
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        if(!formData.username.trim()) {
+            setErrorMessage(["Username is required!!"]);
+            return;
+        }
+        if(!formData.email.trim()) {
+            setErrorMessage(["Email is required"]);
+            return;
+        }
+        if(formData.password.length <8) {
+            setErrorMessage(["Password must be at least 8 character"]);
+            return;
+        }
         console.log("handleSubmit", formData);
         try {
             const response = await fetch("http://localhost:3000/api/users/register", {

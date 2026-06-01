@@ -15,28 +15,48 @@ function RegisterForm() {
         password: "",
         role: "parent"
     });
+    
+
+    //set success and error messages
+    const [message, setMessage] = useState<string>("");
+    const [errorMessage, setErrorMessage] = useState<string[]>([]);
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         console.log("handleSubmit", formData);
         try {
-        const response = await fetch("http://localhost:3000/api/users/register", {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify(formData),
-        });
-        const data = await response.json();
-        console.log("data==>",data);
-        }catch(error) {
+            const response = await fetch("http://localhost:3000/api/users/register", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(formData),
+            });
+            const data = await response.json();
+            console.log("data==>", data);
+            if (response.ok) {
+                setMessage(data.message); //User added Successfully
+                setErrorMessage([]);
+                setFormData({
+                    username: "",
+                    email: "",
+                    password: "",
+                    role: "parent"
+                })
+   
+            } else {
+                setErrorMessage(data.errors || [data.message]);
+                setMessage("");
+            }
 
+        } catch (error) {
+            setErrorMessage(["Something went wrong"]);
         }
-     
+
     }
     function handleChange(e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) {
         const { name, value } = e.target;
-        console.log("handleChange",name, value);
+        console.log("handleChange", name, value);
         setFormData({
             ...formData,
             [name]: value
@@ -46,6 +66,14 @@ function RegisterForm() {
     return (
         <form onSubmit={handleSubmit}>
             <h1>Registration</h1>
+            {message && <p>{message}</p>}
+            {errorMessage.length > 0  &&  (
+                <ul>
+                    {errorMessage.map((error,index)=> (
+                        <li key={index}>{error}</li>
+                    ))}
+                </ul>
+            )}
             <input
                 type="text"
                 name="username"
@@ -76,7 +104,7 @@ function RegisterForm() {
                 <option value="teen">Teen</option>
                 <option value="child">Child</option>
             </select>
-             <br />
+            <br />
             <button type="submit">Register</button>
         </form>
     );

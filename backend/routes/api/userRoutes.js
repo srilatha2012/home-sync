@@ -26,7 +26,16 @@ userRoutes.post("/register", async (req, res) => {
 
         });
     } catch (error) {
-        res.status(400).json(error);
+        if(error.name === 'ValidationError') {
+          const errors = Object.values(error.errors).map((err) => err.message);
+          return res.status(400).json({
+            message: "Validation failed",
+            errors,
+          })
+        }
+        res.status(400).json({
+            message: error.message,
+        });
     }
 });
 

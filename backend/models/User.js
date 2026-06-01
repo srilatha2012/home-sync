@@ -8,12 +8,12 @@ const saltRounds = Number(process.env.SALT_ROUNDS) || 10;
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true,
+        required: [true, "Username is required"],
         trim: true
     },
     email: {
         type: String,
-        required: true,
+        required: [true, "Email is required"],
         unique: true,
         lowercase: true,
         trim: true,
@@ -24,8 +24,8 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
-        minlength: 8,
+        required: [true, "Password required"],
+        minlength: [8, "Password must be at least 8 characters"],
     },
 
     role: {

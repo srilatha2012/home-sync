@@ -7,6 +7,7 @@ require("dotenv").config();
 const express = require("express");
 const dbConnection = require("./config/connection");
 const userRoutes = require("./routes/api/userRoutes");
+const familyRoutes = require("./routes/api/familyRoutes");
 const cors = require("cors");
 
 //create express application
@@ -24,6 +25,7 @@ app.use(cors({
 app.use(express.json());
 
 app.use("/api/users", userRoutes);
+app.use("/api/families",familyRoutes);
 
 
 //Routes

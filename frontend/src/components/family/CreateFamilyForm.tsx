@@ -1,12 +1,7 @@
 import { useState } from "react"
-import type { User } from "../../types";
-
-type FamilyFormProp = {
-    user: User;
-}
 
 //Family form
-function CreateFamilyForm({ user }: FamilyFormProp) {
+function CreateFamilyForm() {
     const [familyName, setFamilyName] = useState<string>("");
     const [message, setMessage] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
@@ -47,8 +42,6 @@ function CreateFamilyForm({ user }: FamilyFormProp) {
             setMessage("");
             setErrorMessage("Something went wrong");
         }
-
-
     }
     return (
         <form onSubmit={handleSubmit}>

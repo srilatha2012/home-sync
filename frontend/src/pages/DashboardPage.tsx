@@ -10,7 +10,6 @@ type Family = {
     members: unknown[];
 }
 
-
 function DashboardPage() {
 
     const navigate = useNavigate();
@@ -53,7 +52,7 @@ function DashboardPage() {
             ) : (
                 <>
                     {/* Passing user data from parent component to child component using props */}
-                    <CreateFamilyForm user={user} />
+                    <CreateFamilyForm/>
                 </>
             )}
 

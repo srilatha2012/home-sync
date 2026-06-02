@@ -53,8 +53,6 @@ userSchema.pre("save", async function () {
 
 //Compare Login password with the hashed password stored in MongoDB
 userSchema.methods.isCorrectPassword = async function (password) {
-    console.log("iscorrectpassword", password);
-    console.log("existing password", this.password);
     return bcrypt.compare(password, this.password); //Here don't need await, because it already returns a Promise
 };
 

@@ -42,9 +42,10 @@ userRoutes.post("/register", async (req, res) => {
 //POST request -User Login
 userRoutes.post("/login", async (req, res) => {
     try {
-
+   
         const { username, email, password } = req.body;
-        const user = await User.findOne({ username: username, email: email });
+        const user = await User.findOne({ email });
+         console.log(user);
         if (!user) {
             return res.status(401).json({ message: "Invalid email or password" });
         }

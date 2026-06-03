@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import CreateFamilyForm from "../components/family/CreateFamilyForm";
 import type { User } from "../types";
 import { useEffect, useState } from "react";
+import CreateProjectForm from "../components/projects/CreateProjectForm";
+import ProjectList from "../components/projects/ProjectList";
 
 
 type Family = {
@@ -15,6 +17,7 @@ function DashboardPage() {
     const navigate = useNavigate();
     const user: User = JSON.parse(localStorage.getItem("user") || "{}");
     const [family, setFamily] = useState<Family | null>(null);
+    const [projects, setProjects] = useState([]);
 
     useEffect(() => {
         async function getFamily() {
@@ -38,6 +41,26 @@ function DashboardPage() {
         localStorage.removeItem("user");
         navigate("/login");
     }
+    async function fetchProjects() {
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await fetch("http://localhost:3000/api/projects", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            const data = await response.json();
+            setProjects(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchProjects();
+    }, []);
     return (
         <div>
             <h1>Dashboard</h1>
@@ -52,9 +75,16 @@ function DashboardPage() {
             ) : (
                 <>
                     {/* Passing user data from parent component to child component using props */}
-                    <CreateFamilyForm/>
+                    <CreateFamilyForm />
                 </>
             )}
+            <CreateProjectForm
+                onProjectCreated={fetchProjects}
+            />
+
+            <ProjectList
+                projects={projects}
+            />
 
         </div>
     )

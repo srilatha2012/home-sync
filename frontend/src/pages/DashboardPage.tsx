@@ -12,12 +12,25 @@ type Family = {
     members: unknown[];
 }
 
+type Task = {
+    _id: string;
+    title: string;
+    description?: string;
+    priority: string;
+    status: string;
+    dueDate?: string;
+    project: {
+        _id: string;
+        title: string;
+    };
+};
 function DashboardPage() {
 
     const navigate = useNavigate();
     const user: User = JSON.parse(localStorage.getItem("user") || "{}");
     const [family, setFamily] = useState<Family | null>(null);
     const [projects, setProjects] = useState([]);
+    const [tasks, setTasks] = useState<Task[]>([]);
 
     useEffect(() => {
         async function getFamily() {
@@ -41,6 +54,7 @@ function DashboardPage() {
         localStorage.removeItem("user");
         navigate("/login");
     }
+    //fetch projects
     async function fetchProjects() {
         try {
             const token = localStorage.getItem("token");
@@ -60,6 +74,25 @@ function DashboardPage() {
 
     useEffect(() => {
         fetchProjects();
+    }, []);
+
+    //fetch tasks
+    async function fetchTasks() {
+        const token = localStorage.getItem("token");
+
+        const response = await fetch("http://localhost:3000/api/tasks", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        const data = await response.json();
+        setTasks(data);
+    }
+    //useEffect
+    useEffect(() => {
+        fetchProjects();
+        fetchTasks();
     }, []);
     return (
         <div>
@@ -84,6 +117,8 @@ function DashboardPage() {
 
             <ProjectList
                 projects={projects}
+                tasks={tasks}
+                onTaskCreated={fetchTasks}
             />
 
         </div>

@@ -8,6 +8,9 @@ const express = require("express");
 const dbConnection = require("./config/connection");
 const userRoutes = require("./routes/api/userRoutes");
 const familyRoutes = require("./routes/api/familyRoutes");
+const projectRoutes = require("./routes/api/projectRoutes");
+const taskRoutes = require("./routes/api/taskRoutes");
+
 const cors = require("cors");
 
 //create express application
@@ -26,7 +29,8 @@ app.use(express.json());
 
 app.use("/api/users", userRoutes);
 app.use("/api/families",familyRoutes);
-
+app.use("/api/projects", projectRoutes);
+app.use("/api/tasks", taskRoutes);
 
 //Routes
 //GET - healthcheck

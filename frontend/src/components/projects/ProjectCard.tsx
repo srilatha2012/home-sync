@@ -37,6 +37,10 @@ function ProjectCard({ project, tasks, onTaskCreated }: ProjectCardProps) {
     const [dueDate, setDueDate] = useState(
         project.dueDate ? project.dueDate.slice(0, 10) : ""
     );
+    // task progress
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter((task) => task.status === 'done').length;
+    const progress = totalTasks === 0 ? 0 : Math.round((completedTasks / totalTasks) * 100)
 
     //Update project
     async function handleUpdateProject(event: React.FormEvent<HTMLFormElement>) {
@@ -164,6 +168,29 @@ function ProjectCard({ project, tasks, onTaskCreated }: ProjectCardProps) {
                 Delete Project
             </button>
 
+            <div>
+                <p>
+                    Progress: {completedTasks} / {totalTasks} tasks completed ({progress}%)
+                </p>
+                <div
+                    style={{
+                        width: "100%",
+                        backgroundColor: "#ddd",
+                        height: "20px",
+                        borderRadius: "10px",
+                        overflow: "hidden",
+                    }}
+                >
+                    <div
+                        style={{
+                            width: `${progress}%`,
+                            backgroundColor: "green",
+                            height: "100%",
+                        }}
+                    ></div>
+
+                </div>
+            </div>
             <CreateTaskForm
                 projectId={project._id}
                 onTaskCreated={onTaskCreated}

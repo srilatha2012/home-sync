@@ -6,11 +6,7 @@ require("dotenv").config();
 //Import Dependencies
 const express = require("express");
 const dbConnection = require("./config/connection");
-const userRoutes = require("./routes/api/userRoutes");
-const familyRoutes = require("./routes/api/familyRoutes");
-const projectRoutes = require("./routes/api/projectRoutes");
-const taskRoutes = require("./routes/api/taskRoutes");
-
+const routes = require("./routes");
 const cors = require("cors");
 
 //create express application
@@ -27,18 +23,13 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use("/api/users", userRoutes);
-app.use("/api/families",familyRoutes);
-app.use("/api/projects", projectRoutes);
-app.use("/api/tasks", taskRoutes);
-
-//Routes
 //GET - healthcheck
 app.get("/api/health", (req, res) => {
-    res.json({message: "HomeSync API is running "});
+    res.json({ message: "HomeSync API is running " });
 });
 
-
+//Main routes
+app.use(routes);
 
 //Connect to MongoDB and start server
 dbConnection()
@@ -48,9 +39,8 @@ dbConnection()
             console.log(`Server listening on PORT ${PORT}`);
         });
     })
-    .catch((error) =>{
+    .catch((error) => {
         console.log("Failed to connect to MongoDB and start server:", error.message);
     })
-
 
 

@@ -1,10 +1,10 @@
-const router = require("express").Router();
+const taskRouter = require("express").Router();
 const { Task, Project, User } = require("../../models");
 const { authMiddleware } = require("../../middleware/authMiddleware");
 
-router.use(authMiddleware);
+taskRouter.use(authMiddleware);
 // CREATE task
-router.post("/", async (req, res) => {
+taskRouter.post("/", async (req, res) => {
   try {
     const project = await Project.findOne({
       _id: req.body.project,
@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
 });
 
 // GET all tasks for logged-in user
-router.get("/", async (req, res) => {
+taskRouter.get("/", async (req, res) => {
   try {
     const tasks = await Task.find({
       user: req.user._id,
@@ -47,7 +47,7 @@ router.get("/", async (req, res) => {
 });
 
 // GET one task
-router.get("/:id", async (req, res) => {
+taskRouter.get("/:id", async (req, res) => {
   try {
     const task = await Task.findOne({
       _id: req.params.id,
@@ -65,7 +65,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // UPDATE task
-router.put("/:id", async (req, res) => {
+taskRouter.put("/:id", async (req, res) => {
   try {
     const task = await Task.findOneAndUpdate(
       {
@@ -90,7 +90,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // DELETE task
-router.delete("/:id", async (req, res) => {
+taskRouter.delete("/:id", async (req, res) => {
   try {
     const task = await Task.findOneAndDelete({
       _id: req.params.id,
@@ -107,4 +107,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = taskRouter;

@@ -56,12 +56,12 @@ function CreateProjectForm({ onProjectCreated }: CreateProjectFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Create Project</h3>
-
+    <form onSubmit={handleSubmit} className="space-y-3">
+  
       {errorMessage && <p>{errorMessage}</p>}
 
       <input
+       className="border rounded p-2 w-full"
         type="text"
         placeholder="Project title"
         value={title}
@@ -69,13 +69,14 @@ function CreateProjectForm({ onProjectCreated }: CreateProjectFormProps) {
       />
       <br/>
       <input
+      className="border rounded p-2 w-full"
         type="text"
         placeholder="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
       <br/>
-      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+      <select className="border rounded p-2 w-full" value={category} onChange={(e) => setCategory(e.target.value)}>
         <option value="study">Study</option>
         <option value="job">Job</option>
         <option value="school">School</option>
@@ -84,7 +85,7 @@ function CreateProjectForm({ onProjectCreated }: CreateProjectFormProps) {
         <option value="other">Other</option>
       </select>
       <br/>
-      <select value={status} onChange={(e) => setStatus(e.target.value)}>
+      <select  className="border rounded p-2 w-full" value={status} onChange={(e) => setStatus(e.target.value)}>
         <option value="not-started">Not Started</option>
         <option value="in-progress">In Progress</option>
         <option value="completed">Completed</option>
@@ -93,11 +94,12 @@ function CreateProjectForm({ onProjectCreated }: CreateProjectFormProps) {
       <br/>
       <input
         type="date"
+        className="border rounded p-2 w-full"
         value={dueDate}
         onChange={(e) => setDueDate(e.target.value)}
       />
       <br/>
-      <button type="submit">Create Project</button>
+      <button  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" type="submit">Create Project</button>
     </form>
   );
 }

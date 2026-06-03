@@ -95,31 +95,85 @@ function DashboardPage() {
         fetchTasks();
     }, []);
     return (
-        <div>
-            <h1>Dashboard</h1>
-            <h2>Welcom, {user.username}</h2>
-            <button onClick={handleLogout}>Logout</button>
-            <hr />
-            {family ? (
+        <div className="max-w-6xl mx-auto p-6">
+            <div className="flex justify-between items-center mb-6">
                 <div>
-                    <h2>Family: {family.name}</h2>
-                    <p>Members: {family.members.length}</p>
+                    <h1 className="text-4xl font-bold text-blue-600">
+                        HomeSync
+                    </h1>
+
+                    <p className="text-gray-600">
+                        Welcome, {user.username}
+                    </p>
+                </div>
+
+                <button
+                    onClick={handleLogout}
+                    className="bg-red-500 text-white px-4 py-2 rounded"
+                >
+                    Logout
+                </button>
+            </div>
+
+            {family ? (
+                <div className="bg-blue-50 border border-blue-100 shadow rounded-lg p-4 mb-6">
+                    <h2 className="text-xl font-semibold text-blue-700">
+                        Family: {family.name}
+                    </h2>
+
+                    <p className="text-gray-600">
+                        Members: {family.members.length}
+                    </p>
                 </div>
             ) : (
-                <>
-                    {/* Passing user data from parent component to child component using props */}
-                    <CreateFamilyForm />
-                </>
-            )}
-            <CreateProjectForm
-                onProjectCreated={fetchProjects}
-            />
+                <div className="bg-white shadow rounded-lg p-6 mb-6">
+                    <h2 className="text-2xl font-semibold mb-4">
+                        Create Family
+                    </h2>
 
-            <ProjectList
-                projects={projects}
-                tasks={tasks}
-                onTaskCreated={fetchTasks}
-            />
+                    <CreateFamilyForm />
+                </div>
+            )}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4">
+                    <h3 className="text-gray-600">Total Projects</h3>
+                    <p className="text-2xl font-bold text-blue-600">{projects.length}</p>
+                </div>
+
+                <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4">
+                    <h3 className="text-gray-600">Total Tasks</h3>
+                    <p className="text-2xl font-bold text-blue-600">{tasks.length}</p>
+                </div>
+
+                <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4">
+                    <h3 className="text-gray-600">Completed Tasks</h3>
+                    <p className="text-2xl font-bold text-blue-600">
+                        {tasks.filter((task) => task.status === "done").length}
+                    </p>
+                </div>
+            </div>
+            <div className="bg-white shadow rounded-lg p-6 mb-6">
+                <h2 className="text-2xl font-semibold mb-4">
+                    Create Project
+                </h2>
+
+                <CreateProjectForm
+                    onProjectCreated={fetchProjects}
+                />
+            </div>
+
+            <div className="mt-8">
+                <h2 className="text-2xl font-semibold mb-4">
+                    My Projects
+                </h2>
+
+                <ProjectList
+                    projects={projects}
+                    tasks={tasks}
+                    onTaskCreated={fetchTasks}
+                    onProjectChanged={fetchProjects}
+                />
+            </div>
 
         </div>
     )

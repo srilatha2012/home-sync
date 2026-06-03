@@ -26,15 +26,20 @@ type ProjectListProps = {
   projects: Project[];
   tasks: Task[];
   onTaskCreated: () => void;
+  onProjectChanged: () => void;
 };
 
-function ProjectList({ projects, tasks, onTaskCreated }: ProjectListProps) {
+function ProjectList({ projects, tasks, onTaskCreated, onProjectChanged }: ProjectListProps) {
   return (
-    <div>
-      <h3>My Projects</h3>
+    <div className="mt-8">
+      {/* <h3 className="text-2xl font-semibold mb-4">
+      My Projects
+    </h3> */}
 
       {projects.length === 0 ? (
-        <p>No projects yet.</p>
+        <p className="text-gray-600">
+          No projects yet. Create your first project.
+        </p>
       ) : (
         projects.map((project) => {
           const projectTasks = tasks.filter(
@@ -47,6 +52,7 @@ function ProjectList({ projects, tasks, onTaskCreated }: ProjectListProps) {
               project={project}
               tasks={projectTasks}
               onTaskCreated={onTaskCreated}
+              onProjectChanged={onProjectChanged}
             />
           );
         })
@@ -54,30 +60,5 @@ function ProjectList({ projects, tasks, onTaskCreated }: ProjectListProps) {
     </div>
   );
 }
-
-
-// function ProjectList({ projects }: ProjectListProps) {
-//   return (
-//     <div>
-//       <h3>My Projects</h3>
-
-//       {projects.length === 0 ? (
-//         <p>No projects yet.</p>
-//       ) : (
-//         projects.map((project) => (
-//           <div key={project._id}>
-//             <h4>{project.title}</h4>
-//             <p>{project.description}</p>
-//             <p>Category: {project.category}</p>
-//             <p>Status: {project.status}</p>
-//             {project.dueDate && (
-//               <p>Due Date: {new Date(project.dueDate).toLocaleDateString()}</p>
-//             )}
-//           </div>
-//         ))
-//       )}
-//     </div>
-//   );
-// }
 
 export default ProjectList;

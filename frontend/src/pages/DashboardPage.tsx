@@ -1,10 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import CreateFamilyForm from "../components/family/CreateFamilyForm";
 import type { User } from "../types";
 import { useEffect, useState } from "react";
 import CreateProjectForm from "../components/projects/CreateProjectForm";
 import ProjectList from "../components/projects/ProjectList";
-
 
 type Family = {
     _id: string;
@@ -35,14 +33,15 @@ type Task = {
 };
 function DashboardPage() {
 
-    const navigate = useNavigate();
     const user: User = JSON.parse(localStorage.getItem("user") || "{}");
     const [family, setFamily] = useState<Family | null>(null);
     const [projects, setProjects] = useState<Project[]>([]);
     const [tasks, setTasks] = useState<Task[]>([]);
     const [searchTerm, setSearchTerm] = useState("");
 
-    const filteredProjects = projects.filter((project) => project.title.toLowerCase().includes(searchTerm.toLocaleLowerCase()));
+   const filteredProjects = projects.filter((project) =>
+  project.title.toLowerCase().includes(searchTerm.toLowerCase())
+);
 
     async function getFamily() {
         const token = localStorage.getItem("token");
@@ -63,11 +62,11 @@ function DashboardPage() {
         getFamily();
     }, []);
 
-    function handleLogout() {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        navigate("/login");
-    }
+    // function handleLogout() {
+    //     localStorage.removeItem("token");
+    //     localStorage.removeItem("user");
+    //     navigate("/login");
+    // }
     //fetch projects
     async function fetchProjects() {
         try {
@@ -92,10 +91,6 @@ function DashboardPage() {
             setProjects([]);
         }
     }
-
-    useEffect(() => {
-        fetchProjects();
-    }, []);
 
     //fetch tasks
     async function fetchTasks() {
@@ -201,6 +196,7 @@ function DashboardPage() {
             </div>
 
         </div>
+        
     )
 }
 

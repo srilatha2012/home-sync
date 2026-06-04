@@ -1,8 +1,8 @@
 import CallToAction from "../components/landing/CallToAction"
 import FamilySection from "../components/landing/FamilySection"
 import FeatureSection from "../components/landing/FeatureSection"
-import Footer from "../components/landing/Footer"
 import HeroSection from "../components/landing/HeroSection"
+import StatsSection from "../components/landing/StatsSection"
 
 
 function HomePage() {
@@ -10,9 +10,9 @@ function HomePage() {
         <>
         <HeroSection/>
         <FeatureSection/>
+        <StatsSection/>
         <FamilySection />
         <CallToAction />
-        <Footer />
         </>
     )
 

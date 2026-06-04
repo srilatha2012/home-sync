@@ -6,6 +6,7 @@ import DashboardPage from './pages/DashboardPage'
 import ProtectedRoute from './components/ProtectedRoute'
 import HomePage from './pages/HomePage'
 import Navbar from './components/landing/Navbar'
+import Footer from './components/landing/Footer'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           }
         />
       </Routes>
+       <Footer />
     </>
   )
 }

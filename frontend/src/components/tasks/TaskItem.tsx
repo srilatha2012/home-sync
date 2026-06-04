@@ -124,7 +124,7 @@ function TaskItem({ task, onTaskUpdated, onTaskDeleted }: TaskItemProps) {
             )}
 
             <div className="flex gap-2 mt-2">
-                <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-sm">
+                <span className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded text-sm">
                     Status: {task.status}
                 </span>
 

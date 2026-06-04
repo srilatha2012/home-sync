@@ -244,7 +244,7 @@ function ProjectCard({ project, tasks, onTaskCreated, onProjectChanged }: Projec
             <div className="flex gap-2 mt-4 mb-3">
                 <button
                     className={`px-3 py-1 rounded ${taskFilter === "all"
-                        ? "bg-blue-600 text-white"
+                        ? "bg-indigo-600 text-white"
                         : "bg-gray-100 text-gray-700"
                         }`}
                     onClick={() => setTaskFilter("all")}
@@ -254,7 +254,7 @@ function ProjectCard({ project, tasks, onTaskCreated, onProjectChanged }: Projec
 
                 <button
                     className={`px-3 py-1 rounded ${taskFilter === "todo"
-                        ? "bg-blue-600 text-white"
+                        ? "bg-indigo-600 text-white"
                         : "bg-gray-100 text-gray-700"
                         }`}
                     onClick={() => setTaskFilter("todo")}
@@ -264,7 +264,7 @@ function ProjectCard({ project, tasks, onTaskCreated, onProjectChanged }: Projec
 
                 <button
                     className={`px-3 py-1 rounded ${taskFilter === "in-progress"
-                        ? "bg-blue-600 text-white"
+                        ? "bg-indigo-600 text-white"
                         : "bg-gray-100 text-gray-700"
                         }`}
                     onClick={() => setTaskFilter("in-progress")}
@@ -274,7 +274,7 @@ function ProjectCard({ project, tasks, onTaskCreated, onProjectChanged }: Projec
 
                 <button
                     className={`px-3 py-1 rounded ${taskFilter === "done"
-                        ? "bg-blue-600 text-white"
+                        ? "bg-indigo-600 text-white"
                         : "bg-gray-100 text-gray-700"
                         }`}
                     onClick={() => setTaskFilter("done")}

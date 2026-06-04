@@ -5,23 +5,27 @@ import LoginPage from './pages/LoginPage'
 import DashboardPage from './pages/DashboardPage'
 import ProtectedRoute from './components/ProtectedRoute'
 import HomePage from './pages/HomePage'
+import Navbar from './components/landing/Navbar'
 
 function App() {
-  
+
   return (
-    <Routes>
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/login" element={< LoginPage/>} />
-      <Route path="/" element={<HomePage/>} />
-      <Route 
-         path="/dashboard" 
-         element ={
-        <ProtectedRoute>
-          < DashboardPage/>
-          </ProtectedRoute>
-         }  
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={< LoginPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              < DashboardPage />
+            </ProtectedRoute>
+          }
         />
-    </Routes>
+      </Routes>
+    </>
   )
 }
 

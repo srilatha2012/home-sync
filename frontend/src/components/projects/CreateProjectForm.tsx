@@ -99,7 +99,7 @@ function CreateProjectForm({ onProjectCreated }: CreateProjectFormProps) {
         onChange={(e) => setDueDate(e.target.value)}
       />
       <br/>
-      <button  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" type="submit">Create Project</button>
+      <button  className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700" type="submit">Create Project</button>
     </form>
   );
 }

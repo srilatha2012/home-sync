@@ -82,7 +82,7 @@ function RegisterForm() {
                 onSubmit={handleSubmit}
                 className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md"
             >
-                <h1 className="text-3xl font-bold text-center text-blue-600 mb-2">
+                <h1 className="text-3xl font-bold text-center text-indigo-600 mb-2">
                     HomeSync
                 </h1>
 
@@ -148,7 +148,7 @@ function RegisterForm() {
                 </select>
 
                 <button
-                    className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                    className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700"
                     type="submit"
                 >
                     Register
@@ -159,7 +159,7 @@ function RegisterForm() {
                 </p>
 
                 <p className="text-center">
-                    <Link to="/login" className="text-blue-600 hover:underline">
+                    <Link to="/login" className="text-indigo-600 hover:underline">
                         Login
                     </Link>
                 </p>

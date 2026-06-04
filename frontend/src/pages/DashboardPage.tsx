@@ -116,34 +116,28 @@ function DashboardPage() {
         fetchTasks();
     }, []);
     return (
-        <div className="max-w-6xl mx-auto p-6">
-            <div className="flex justify-between items-center mb-6">
-                <div>
-                    <h1 className="text-4xl font-bold text-blue-600">
-                        HomeSync
-                    </h1>
+        <div className="max-w-6xl mx-auto p-6 mt-4">
+            <div className="mb-6">
 
-                    <p className="text-gray-600">
-                        Welcome, {user.username}
-                    </p>
-                </div>
-
-                <button
-                    onClick={handleLogout}
-                    className="bg-red-500 text-white px-4 py-2 rounded"
-                >
-                    Logout
-                </button>
+                <h2 className="text-2xl font-semibold text-gray-800">
+                    Welcome,{" "}
+                    <span className="text-indigo-600">
+                        {user.username}
+                    </span>
+                </h2>
+                <p className="text-gray-500">
+                    Manage your family projects and tasks here.
+                </p>
             </div>
 
             {family ? (
-                <div className="bg-blue-50 border border-blue-100 shadow rounded-lg p-4 mb-6">
-                    <h2 className="text-xl font-semibold text-blue-700">
-                        Family: {family.name}
-                    </h2>
+                <div className="bg-indigo-50 border border-indigo-100 rounded-lg shadow-sm p-4 mb-6">
+                    <h3 className="text-lg font-semibold text-indigo-700">
+                        👨‍👩‍👧‍👦 {family.name}
+                    </h3>
 
-                    <p className="text-gray-600">
-                        Members: {family.members.length}
+                    <p className="text-sm text-gray-500 mt-1">
+                        {family.members.length} member{family.members.length !== 1 ? "s" : ""}
                     </p>
                 </div>
             ) : (
@@ -158,17 +152,17 @@ function DashboardPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4">
                     <h3 className="text-gray-600">Total Projects</h3>
-                    <p className="text-2xl font-bold text-blue-600">{projects.length}</p>
+                    <p className="text-3xl font-bold text-indigo-600">{projects.length}</p>
                 </div>
 
                 <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4">
                     <h3 className="text-gray-600">Total Tasks</h3>
-                    <p className="text-2xl font-bold text-blue-600">{tasks.length}</p>
+                    <p className="text-3xl font-bold text-indigo-600">{tasks.length}</p>
                 </div>
 
                 <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4">
                     <h3 className="text-gray-600">Completed Tasks</h3>
-                    <p className="text-2xl font-bold text-blue-600">
+                    <p className="text-3xl font-bold text-indigo-600">
                         {tasks.filter((task) => task.status === "done").length}
                     </p>
                 </div>

@@ -41,18 +41,25 @@ function LoginForm() {
             });
             const data = await response.json();
             if (response.ok) {
-                console.log("data ====>", data);
+    
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("user", JSON.stringify(data.user));
 
                 setMessage(data.message); //Login Successful
                 setErrorMessage([]);
-                setLoginFormData({
-                    // username: "",
-                    email: "",
-                    password: ""
-                });
-                navigate("/dashboard");
+                // setLoginFormData({
+                //     // username: "",
+                //     email: "",
+                //     password: ""
+                // });
+                
+                //navigate("/dashboard"); Navbar may not re-read localStorage immediately
+                {/* 
+                    1. Browser-level navigation
+                    2. Reloads the whole app
+                    3. Navbar reads localStorage fresh
+                */}
+                window.location.href = "/dashboard"
             } else {
                 setMessage("");
                 setErrorMessage(data.message || "Login Failed");
@@ -76,7 +83,7 @@ function LoginForm() {
                 onSubmit={handleSubmit}
                 className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md"
             >
-                <h1 className="text-3xl font-bold text-center text-blue-600 mb-2">
+                <h1 className="text-3xl font-bold text-center text-indigo-600 mb-2">
                     HomeSync
                 </h1>
 
@@ -117,7 +124,7 @@ function LoginForm() {
                 />
 
                 <button
-                    className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                    className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700"
                     type="submit"
                 >
                     Login
@@ -127,7 +134,7 @@ function LoginForm() {
                 </p>
 
                 <p className="text-center">
-                    <Link to="/register" className="text-blue-600 hover:underline">
+                    <Link to="/register" className="text-indigo-600 hover:underline">
                         Create an account
                     </Link>
                 </p>

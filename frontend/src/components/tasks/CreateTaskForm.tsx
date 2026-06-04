@@ -95,7 +95,7 @@ function CreateTaskForm({ projectId, onTaskCreated }: CreateTaskFormProps) {
         />
 
         <button
-          className="bg-blue-600 text-white px-3 py-2 rounded"
+          className="bg-indigo-600 text-white px-3 py-2 rounded"
           type="submit"
         >
           Add Task

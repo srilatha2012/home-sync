@@ -7,7 +7,7 @@ function FamilySection() {
 
       <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
         <div className="border rounded-lg p-6 text-center bg-white shadow-md hover:shadow-lg transition duration-300">
-          <h3 className="text-xl font-semibold mb-2">👨 Parent</h3>
+          <h3 className="text-xl font-semibold mb-2">👩 Parent</h3>
           <p className="text-gray-600">Career goals and study plans</p>
         </div>
 
@@ -22,7 +22,7 @@ function FamilySection() {
         </div>
 
         <div className="border rounded-lg p-6 text-center bg-white shadow-md hover:shadow-lg transition duration-300">
-          <h3 className="text-xl font-semibold mb-2">👩 Spouse</h3>
+          <h3 className="text-xl font-semibold mb-2">👨 Spouse</h3>
           <p className="text-gray-600">Home and personal tasks</p>
         </div>
       </div>

@@ -3,6 +3,7 @@ import type { User } from "../types";
 import { useEffect, useState } from "react";
 import CreateProjectForm from "../components/projects/CreateProjectForm";
 import ProjectList from "../components/projects/ProjectList";
+import { API_URL } from "../../config";
 
 type Family = {
     _id: string;
@@ -46,7 +47,7 @@ function DashboardPage() {
     async function getFamily() {
         const token = localStorage.getItem("token");
 
-        const response = await fetch("http://localhost:3000/api/families/my-family", {
+        const response = await fetch(`${API_URL}/api/families/my-family`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
@@ -72,7 +73,7 @@ function DashboardPage() {
         try {
             const token = localStorage.getItem("token");
 
-            const response = await fetch("http://localhost:3000/api/projects", {
+            const response = await fetch(`${API_URL}/api/projects`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -96,7 +97,7 @@ function DashboardPage() {
     async function fetchTasks() {
         const token = localStorage.getItem("token");
 
-        const response = await fetch("http://localhost:3000/api/tasks", {
+        const response = await fetch(`${API_URL}/api/tasks`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type LoginFormData = {
     // username: string,
@@ -27,6 +27,13 @@ function LoginForm() {
             setErrorMessage(["Email is required"]);
             return;
         }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(loginFormData.email)) {
+            setErrorMessage(["Please enter a valid email address"]);
+            return;
+        }
         if (!loginFormData.password.trim()) {
             setErrorMessage(["Password is required"]);
             return;
@@ -41,7 +48,7 @@ function LoginForm() {
             });
             const data = await response.json();
             if (response.ok) {
-    
+
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("user", JSON.stringify(data.user));
 
@@ -52,7 +59,7 @@ function LoginForm() {
                 //     email: "",
                 //     password: ""
                 // });
-                
+
                 //navigate("/dashboard"); Navbar may not re-read localStorage immediately
                 {/* 
                     1. Browser-level navigation
@@ -62,7 +69,7 @@ function LoginForm() {
                 window.location.href = "/dashboard"
             } else {
                 setMessage("");
-                setErrorMessage(data.message || "Login Failed");
+                setErrorMessage([data.message || "Login Failed"]);
             }
         } catch (error) {
             setMessage("");

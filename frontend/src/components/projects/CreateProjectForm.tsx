@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_URL } from "../../config";
 
 type CreateProjectFormProps = {
   onProjectCreated: () => void;
@@ -23,7 +24,7 @@ function CreateProjectForm({ onProjectCreated }: CreateProjectFormProps) {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:3000/api/projects", {
+      const response = await fetch(`${API_URL}/api/projects`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

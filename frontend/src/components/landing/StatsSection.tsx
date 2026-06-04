@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../../config";
 import axios from "axios";
 
 type Stats = {
@@ -14,7 +15,7 @@ function StatsSection() {
   useEffect(() => {
     async function fetchStats() {
       try {
-        const response = await axios.get("http://localhost:3000/api/public/stats");
+        const response = await axios.get(`${API_URL}/api/public/stats`);
         setStats(response.data);
       } catch (error) {
         console.log("Failed to fetch stats", error);

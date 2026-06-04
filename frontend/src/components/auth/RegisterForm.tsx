@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { API_URL } from "../../config";
 
 function RegisterForm() {
 
@@ -38,7 +39,7 @@ function RegisterForm() {
         }
         console.log("handleSubmit", formData);
         try {
-            const response = await fetch("http://localhost:3000/api/users/register", {
+            const response = await fetch(`${API_URL}/api/users/register`, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"

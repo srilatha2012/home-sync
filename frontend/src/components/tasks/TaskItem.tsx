@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_URL } from "../../config";
 
 type Task = {
     _id: string;
@@ -30,7 +31,7 @@ function TaskItem({ task, onTaskUpdated, onTaskDeleted }: TaskItemProps) {
 
         const token = localStorage.getItem("token");
 
-        const response = await fetch(`http://localhost:3000/api/tasks/${task._id}`, {
+        const response = await fetch(`${API_URL}/api/tasks/${task._id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

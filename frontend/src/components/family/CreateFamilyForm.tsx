@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { API_URL } from "../../config";
 
 type CreateFamilyFormProps = {
   onFamilyCreated: () => void;
@@ -20,7 +21,7 @@ function CreateFamilyForm({ onFamilyCreated }: CreateFamilyFormProps) {
             //backend API call
             const token = localStorage.getItem("token");
 
-            const response = await fetch("http://localhost:3000/api/families/", {
+            const response = await fetch(`${API_URL}/api/families/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

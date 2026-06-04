@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { API_URL } from "../../config";
 
 type LoginFormData = {
     // username: string,
@@ -39,7 +40,7 @@ function LoginForm() {
             return;
         }
         try {
-            const response = await fetch("http://localhost:3000/api/users/login", {
+            const response = await fetch(`${API_URL}/api/users/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

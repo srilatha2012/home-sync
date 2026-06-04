@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CreateTaskForm from "../tasks/CreateTaskForm";
 import TaskItem from "../tasks/TaskItem";
+import { API_URL } from "../../config";
 
 type Project = {
     _id: string;
@@ -51,7 +52,7 @@ function ProjectCard({ project, tasks, onTaskCreated, onProjectChanged }: Projec
     async function handleUpdateProject(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        const response = await fetch(`http://localhost:3000/api/projects/${project._id}`, {
+        const response = await fetch(`${API_URL}/api/projects/${project._id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -80,7 +81,7 @@ function ProjectCard({ project, tasks, onTaskCreated, onProjectChanged }: Projec
         const confirmDelete = window.confirm("Are you sure you want to delete this project?");
 
         if (!confirmDelete) return;
-        const response = await fetch(`http://localhost:3000/api/projects/${project._id}`, {
+        const response = await fetch(`${API_URL}/api/projects/${project._id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -100,7 +101,7 @@ function ProjectCard({ project, tasks, onTaskCreated, onProjectChanged }: Projec
         );
 
         if (!confirmDelete) return;
-        const response = await fetch(`http://localhost:3000/api/tasks/${taskId}`, {
+        const response = await fetch(`${API_URL}/api/tasks/${taskId}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`,

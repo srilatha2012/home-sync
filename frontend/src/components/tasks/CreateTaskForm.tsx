@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_URL } from "../../config";
 
 type CreateTaskFormProps = {
   projectId: string;
@@ -17,7 +18,7 @@ function CreateTaskForm({ projectId, onTaskCreated }: CreateTaskFormProps) {
 
     const token = localStorage.getItem("token");
 
-    const response = await fetch("http://localhost:3000/api/tasks", {
+    const response = await fetch(`${API_URL}/api/tasks`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -32,20 +32,22 @@ function DashboardPage() {
     const [projects, setProjects] = useState([]);
     const [tasks, setTasks] = useState<Task[]>([]);
 
-    useEffect(() => {
-        async function getFamily() {
-            const token = localStorage.getItem("token");
+    async function getFamily() {
+        const token = localStorage.getItem("token");
 
-            const response = await fetch("http://localhost:3000/api/families/my-family", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                }
-            })
-            const data = await response.json();
-            if (response.ok) {
-                setFamily(data.family)
+        const response = await fetch("http://localhost:3000/api/families/my-family", {
+            headers: {
+                Authorization: `Bearer ${token}`,
             }
+        })
+        const data = await response.json();
+        if (response.ok) {
+            setFamily(data.family)
         }
+    }
+
+    useEffect(() => {
+
         getFamily();
     }, []);
 
@@ -131,7 +133,7 @@ function DashboardPage() {
                         Create Family
                     </h2>
 
-                    <CreateFamilyForm />
+                    <CreateFamilyForm onFamilyCreated={getFamily} />
                 </div>
             )}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">

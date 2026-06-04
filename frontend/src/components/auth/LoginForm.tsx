@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 type LoginFormData = {
     // username: string,
@@ -71,41 +71,69 @@ function LoginForm() {
         });
     }
     return (
-        <form onSubmit={handleSubmit}>
-            <h1>Login</h1>
-            {message && <p>{message}</p>}
-            {errorMessage.length > 0 && (
-                <ul>
-                    {errorMessage.map((error, index) => (
-                        <li key={index}>{error}</li>
-                    ))}
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+            <form
+                onSubmit={handleSubmit}
+                className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md"
+            >
+                <h1 className="text-3xl font-bold text-center text-blue-600 mb-2">
+                    HomeSync
+                </h1>
 
-                </ul>
-            )}
-            {/* <input
-                type="text"
-                name="username"
-                placeholder="Username"
-                value={loginFormData.username}
-                onChange={handleChange}
-            /> <br /> */}
-            <input
-                type="text"
-                name="email"
-                placeholder="Email"
-                value={loginFormData.email}
-                onChange={handleChange}
-            /> <br />
-            <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={loginFormData.password}
-                onChange={handleChange}
-            /> <br />
-            <button type="submit">Login</button>
-        </form>
-    )
+                <h2 className="text-xl font-semibold text-center mb-6">
+                    Login
+                </h2>
+
+                {message && (
+                    <p className="bg-green-100 text-green-700 px-3 py-2 rounded mb-4">
+                        {message}
+                    </p>
+                )}
+
+                {errorMessage.length > 0 && (
+                    <ul className="bg-red-100 text-red-700 px-3 py-2 rounded mb-4">
+                        {errorMessage.map((error, index) => (
+                            <li key={index}>{error}</li>
+                        ))}
+                    </ul>
+                )}
+
+                <input
+                    className="w-full border rounded px-3 py-2 mb-4"
+                    type="text"
+                    name="email"
+                    placeholder="Email"
+                    value={loginFormData.email}
+                    onChange={handleChange}
+                />
+
+                <input
+                    className="w-full border rounded px-3 py-2 mb-4"
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={loginFormData.password}
+                    onChange={handleChange}
+                />
+
+                <button
+                    className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                    type="submit"
+                >
+                    Login
+                </button>
+                <p className="text-center mt-4 text-gray-600">
+                    Don't have an account?
+                </p>
+
+                <p className="text-center">
+                    <Link to="/register" className="text-blue-600 hover:underline">
+                        Create an account
+                    </Link>
+                </p>
+            </form>
+        </div>
+    );
 }
 
 export default LoginForm;

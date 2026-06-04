@@ -1,7 +1,10 @@
 import { useState } from "react"
 
+type CreateFamilyFormProps = {
+  onFamilyCreated: () => void;
+};
 //Family form
-function CreateFamilyForm() {
+function CreateFamilyForm({ onFamilyCreated }: CreateFamilyFormProps) {
     const [familyName, setFamilyName] = useState<string>("");
     const [message, setMessage] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
@@ -33,6 +36,7 @@ function CreateFamilyForm() {
                 setMessage(data.message);
                 setErrorMessage("");
                 setFamilyName("");
+                 onFamilyCreated();
             } else {
                 setMessage("");
                 setErrorMessage(data.message || "Failed to create Family");
@@ -44,22 +48,37 @@ function CreateFamilyForm() {
         }
     }
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Create Family</h2>
-            {message && <p>{message}</p>}
-            {errorMessage && <p>{errorMessage}</p>}
+        <form onSubmit={handleSubmit} className="space-y-4">
+        
+            {message && (
+                <p className="bg-green-100 text-green-700 px-3 py-2 rounded">
+                    {message}
+                </p>
+            )}
+
+            {errorMessage && (
+                <p className="bg-red-100 text-red-700 px-3 py-2 rounded">
+                    {errorMessage}
+                </p>
+            )}
+
             <input
+                className="w-full border rounded px-3 py-2"
                 type="text"
                 name="familyName"
                 placeholder="Enter family name"
                 value={familyName}
                 onChange={(event) => setFamilyName(event.target.value)}
-
             />
-            <br />
-            <button type="submit">Add Family</button>
+
+            <button
+                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                type="submit"
+            >
+                Add Family
+            </button>
         </form>
-    )
+    );
 }
 
 export default CreateFamilyForm

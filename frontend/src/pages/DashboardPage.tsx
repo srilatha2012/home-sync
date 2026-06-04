@@ -3,8 +3,7 @@ import type { User } from "../types";
 import { useEffect, useState } from "react";
 import CreateProjectForm from "../components/projects/CreateProjectForm";
 import ProjectList from "../components/projects/ProjectList";
-import { API_URL } from "../../config";
-
+import { API_URL } from "../config"
 type Family = {
     _id: string;
     name: string;

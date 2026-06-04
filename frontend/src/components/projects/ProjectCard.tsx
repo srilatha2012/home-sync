@@ -38,10 +38,14 @@ function ProjectCard({ project, tasks, onTaskCreated, onProjectChanged }: Projec
     const [dueDate, setDueDate] = useState(
         project.dueDate ? project.dueDate.slice(0, 10) : ""
     );
+    const [taskFilter, setTaskFilter] = useState("all");
     // task progress
     const totalTasks = tasks.length;
     const completedTasks = tasks.filter((task) => task.status === 'done').length;
-    const progress = totalTasks === 0 ? 0 : Math.round((completedTasks / totalTasks) * 100)
+    const progress = totalTasks === 0 ? 0 : Math.round((completedTasks / totalTasks) * 100);
+
+    const filteredTasks = taskFilter === "all" ? tasks : tasks.filter((task) => task.status === taskFilter);
+
 
     //Update project
     async function handleUpdateProject(event: React.FormEvent<HTMLFormElement>) {
@@ -236,13 +240,58 @@ function ProjectCard({ project, tasks, onTaskCreated, onProjectChanged }: Projec
                 projectId={project._id}
                 onTaskCreated={onTaskCreated}
             />
-
             <h5 className="font-semibold text-lg mt-5 mb-3">Tasks</h5>
+            <div className="flex gap-2 mt-4 mb-3">
+                <button
+                    className={`px-3 py-1 rounded ${taskFilter === "all"
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-100 text-gray-700"
+                        }`}
+                    onClick={() => setTaskFilter("all")}
+                >
+                    All
+                </button>
 
-            {tasks.length === 0 ? (
-                <p>No tasks yet.</p>
+                <button
+                    className={`px-3 py-1 rounded ${taskFilter === "todo"
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-100 text-gray-700"
+                        }`}
+                    onClick={() => setTaskFilter("todo")}
+                >
+                    To Do
+                </button>
+
+                <button
+                    className={`px-3 py-1 rounded ${taskFilter === "in-progress"
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-100 text-gray-700"
+                        }`}
+                    onClick={() => setTaskFilter("in-progress")}
+                >
+                    In Progress
+                </button>
+
+                <button
+                    className={`px-3 py-1 rounded ${taskFilter === "done"
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-100 text-gray-700"
+                        }`}
+                    onClick={() => setTaskFilter("done")}
+                >
+                    Done
+                </button>
+            </div>
+
+
+            {filteredTasks.length === 0 ? (
+                <p className="text-gray-500">
+                    {taskFilter === "all"
+                        ? "No tasks yet."
+                        : "No tasks match this filter."}
+                </p>
             ) : (
-                tasks.map((task) => (
+                filteredTasks.map((task) => (
                     <div
                         key={task._id}
                         className="mb-3">

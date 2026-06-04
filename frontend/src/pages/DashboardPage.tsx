@@ -12,6 +12,15 @@ type Family = {
     members: unknown[];
 }
 
+type Project = {
+    _id: string;
+    title: string;
+    description?: string;
+    category: string;
+    status: string;
+    dueDate?: string;
+};
+
 type Task = {
     _id: string;
     title: string;
@@ -29,8 +38,11 @@ function DashboardPage() {
     const navigate = useNavigate();
     const user: User = JSON.parse(localStorage.getItem("user") || "{}");
     const [family, setFamily] = useState<Family | null>(null);
-    const [projects, setProjects] = useState([]);
+    const [projects, setProjects] = useState<Project[]>([]);
     const [tasks, setTasks] = useState<Task[]>([]);
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const filteredProjects = projects.filter((project) => project.title.toLowerCase().includes(searchTerm.toLocaleLowerCase()));
 
     async function getFamily() {
         const token = localStorage.getItem("token");
@@ -68,9 +80,16 @@ function DashboardPage() {
             });
 
             const data = await response.json();
-            setProjects(data);
+
+            if (response.ok) {
+                setProjects(data);
+            } else {
+                console.log("Failed to fetch projects:", data.message);
+                setProjects([]);
+            }
         } catch (error) {
-            console.log(error);
+            console.log("Error fetching projects:", error);
+            setProjects([]);
         }
     }
 
@@ -168,13 +187,23 @@ function DashboardPage() {
                 <h2 className="text-2xl font-semibold mb-4">
                     My Projects
                 </h2>
-
-                <ProjectList
-                    projects={projects}
-                    tasks={tasks}
-                    onTaskCreated={fetchTasks}
-                    onProjectChanged={fetchProjects}
+                <input
+                    type="text"
+                    placeholder="🔍 Search projects..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full border rounded px-3 py-2 mb-4"
                 />
+                {filteredProjects.length === 0 && searchTerm.trim() ? (
+                    <p className="text-gray-500">No matching projects found.</p>
+                ) : (
+                    <ProjectList
+                        projects={filteredProjects}
+                        tasks={tasks}
+                        onTaskCreated={fetchTasks}
+                        onProjectChanged={fetchProjects}
+                    />
+                )}
             </div>
 
         </div>

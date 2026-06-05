@@ -10,6 +10,11 @@ Users can:
 - Track progress
 - Monitor project completion through a dashboard
 
+## Live Link
+Frontend: https://homesync-frontend-7e61.onrender.com
+Backend: https://homesync-backend-r67c.onrender.com/
+
+
 ## Features
 
 ### Authentication
